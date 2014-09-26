@@ -1,0 +1,32 @@
+def quick_sort(table):
+    i = 0
+    j = len(table)
+    mid = j /2
+
+    while(i <= j):
+        # Case 1: Keep incrementing left index 'i' until i > mid
+        while(table[i] < table[mid]):
+            i += 1
+        # Case 2: Keep decrementing right index 'j' until j < mid
+        while(table[j] > table[mid]):
+            j -= 1
+
+        # Compare value and swap
+        if(table[i] < table[j]):
+            tmp = table[i]
+            table[i] = table[j]
+            table[j] = tmp
+
+        i += 1
+        j += 1
+
+    # Case 3: when j < i
+    quick_sort(table[0: j])
+    quick_sort(table[i: len(table)])
+
+    return table
+
+
+if __name__ == '__main__':
+    table = [5, 1, 4, 2, 10, 99, 0]
+    print quick_sort(table)

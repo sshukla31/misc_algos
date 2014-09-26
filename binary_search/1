@@ -1,0 +1,28 @@
+def binary_search(number_list, value):
+    top = 0
+    bottom = len(number_list) - 1
+    found = False
+
+    while(top <= bottom):
+        middle = (top + bottom)/ 2
+
+        if(value == number_list[middle]):
+            found = True
+        elif(value <= number_list[middle]):
+            binary_search(number_list[top : middle], value)
+        elif(value > number_list[]):
+            binary_search(number_list[middle : bottom], value)
+
+    print "Present" if found else "Not Found"
+
+
+
+
+def main():
+    array = range(0, 51)
+    value = int(input("No to search for?"))
+    print binary_search(number_list=array, value=value)
+
+
+if __name__ == '__main__':
+    main()

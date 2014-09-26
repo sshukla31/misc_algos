@@ -1,0 +1,17 @@
+def get_unique_list(names):
+    result = {}
+    for val in names:
+        for index, char in enumerate(sorted(val)):
+            if index == len(val) - 2:
+                continue
+            if char == val[index + 1]:
+                result.update(char=False)
+                break;
+        result.update(char=True)
+
+    print result:
+
+
+if __name__ == '__main__':
+    names = ['aabc', 'abcd', 'abcc']
+    result = get_unique_list(names)

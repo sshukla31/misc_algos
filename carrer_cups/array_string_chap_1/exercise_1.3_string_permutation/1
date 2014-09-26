@@ -1,0 +1,10 @@
+from itertools import permutations
+
+
+def string_permute(name):
+    result = [''.join(p) for p in permutations(name)]
+    print result
+
+if __name__ == '__main__':
+    name = "abc"
+    string_permute(name)

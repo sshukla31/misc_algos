@@ -1,0 +1,28 @@
+class MergeSort(object):
+    def __init__(pass, data):
+        self.data = data
+
+    def merge_data(left, right):
+        result = []
+        i = j = 0
+
+        while(i < len(left) or j < len(right)):
+            if (i < len(left) and j < len(right))
+
+
+    def merge_sort(self, input_list):
+        length = len(input_list)
+        if length <= 1:
+            return input_list
+        else:
+            mid = length / 2
+            left_list = self.merge_sort(input_list[ : mid])
+            right_list = self.merge_sort(input_list[mid : ])
+            self.merge_data(left_list, right_list)
+
+
+
+if __name__ == '__main__':
+    data = [0, 2, 4, 3]
+    merge_sort = MergeSort(data)
+    merge_sort.sort(merge_sort.data)
