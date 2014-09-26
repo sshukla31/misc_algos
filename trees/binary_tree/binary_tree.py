@@ -160,12 +160,29 @@ class BinaryTree(object):
             self.purge(node.right)
             node.left = node.right = None
 
-
     def height(self, root):
         if root == None:
             return -1
         else:
             return max(self.height(root.left), self.height(root.right)) + 1
+
+    def find_min(self, root):
+        if root is None:
+            return root
+
+        if root.left is None:
+            return root.data
+
+        return self.find_min(root.left)
+    
+    def find_max(self, root):
+        if root is None:
+            return root
+
+        if root.right is None:
+            return root.data
+
+        return self.find_max(root.right)
 
 if __name__ == '__main__':
 
@@ -176,6 +193,8 @@ if __name__ == '__main__':
     binary_tree = BinaryTree()
     for value in [5, 2, 1, 9, 10, 0, 6]:
         binary_tree.insert(value)
+    
+    
     for element in [5, 9]:
         meta_data = binary_tree.record_meta_data(element)
         if meta_data.get('found') is not None:
@@ -193,6 +212,10 @@ if __name__ == '__main__':
     binary_tree.print_postorder(binary_tree.root)
     print "Height of the tree"
     print binary_tree.height(binary_tree.root)
+    print "min element of the tree"
+    print binary_tree.find_min(binary_tree.root)
+    print "max element of the tree"
+    print binary_tree.find_max(binary_tree.root)
     print "Purge-Tree----"
     binary_tree.purge(binary_tree.root)
     binary_tree.print_inorder(binary_tree.root)  # should print only root as we are passing root as param
@@ -221,3 +244,4 @@ if __name__ == '__main__':
 
     print "Final Tree flow after all deletion"
     binary_tree_new.print_postorder(binary_tree_new.root)
+
