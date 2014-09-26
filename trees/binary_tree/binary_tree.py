@@ -133,6 +133,39 @@ class BinaryTree(object):
             else:
                 print "value not found"
 
+    def delete_recursive(self, root, number):
+        """ Delete node using recursion algo """
+        if root is None:
+            return root
+        elif (number < root.data):
+            # If the node is deleted from the left subtree then we get back the address of
+            # the new node. This new node is becomes left child of the root node
+            root.left = self.delete_recursive(root.left, number)
+        elif (number > root.data):
+            root.right = self.delete_recursive(root.right, number)
+        else:
+            # Case 1: root has no children
+            if (root.left is None and root.right is None):
+                root = None
+                return root
+            # Case 2: root has one children
+            elif (root.left is not None and root.right is None):
+                temp = root
+                root = root.left
+                temp = None
+            elif (root.right is not None and root.left is None):
+                temp = root
+                root = root.right
+                temp = None
+            # Case 3: root has 2 children
+            else:
+                max_element = self.find_max(root.left)
+                root.data = max_element.data
+                root.left = self.delete_recursive(root.left, max_element.data)
+
+        return root
+
+
     def print_inorder(self, node=None):
         """ Print tree in-order """
         if node is not None:
@@ -171,7 +204,7 @@ class BinaryTree(object):
             return root
 
         if root.left is None:
-            return root.data
+            return root
 
         return self.find_min(root.left)
     
@@ -180,7 +213,7 @@ class BinaryTree(object):
             return root
 
         if root.right is None:
-            return root.data
+            return root
 
         return self.find_max(root.right)
 
@@ -213,9 +246,11 @@ if __name__ == '__main__':
     print "Height of the tree"
     print binary_tree.height(binary_tree.root)
     print "min element of the tree"
-    print binary_tree.find_min(binary_tree.root)
+    min_element = binary_tree.find_min(binary_tree.root)
+    print min_element.data
     print "max element of the tree"
-    print binary_tree.find_max(binary_tree.root)
+    max_element = binary_tree.find_max(binary_tree.root)
+    print max_element.data
     print "Purge-Tree----"
     binary_tree.purge(binary_tree.root)
     binary_tree.print_inorder(binary_tree.root)  # should print only root as we are passing root as param
@@ -245,3 +280,28 @@ if __name__ == '__main__':
     print "Final Tree flow after all deletion"
     binary_tree_new.print_postorder(binary_tree_new.root)
 
+
+    '''
+    Delete test using recursion method
+    '''
+    print "------------------- Delete operations: using recursion -------------------------------------------"
+    binary_tree_new = BinaryTree()
+    print "Test Single Node deletion: 3 Cases"
+    for value in [10, 5, 14, 3, 6, 4, 12, 16, 11, 18, 2]:
+        binary_tree_new.insert(value)
+    binary_tree_new.print_inorder(binary_tree_new.root)
+    print "Case 1: No child"
+    binary_tree_new.delete_recursive(binary_tree_new.root, 2)
+    binary_tree_new.print_inorder(binary_tree_new.root)
+    print "Case 2-a: One left child"
+    binary_tree_new.delete_recursive(binary_tree_new.root, 12)
+    binary_tree_new.print_inorder(binary_tree_new.root)
+    print "Case 2-b: One right child"
+    binary_tree_new.delete_recursive(binary_tree_new.root, 16)
+    binary_tree_new.print_inorder(binary_tree_new.root)
+    print "Case 3: Two child"
+    binary_tree_new.delete_recursive(binary_tree_new.root, 5)
+    binary_tree_new.print_inorder(binary_tree_new.root)
+
+    print "Final Tree flow after all deletion"
+    binary_tree_new.print_postorder(binary_tree_new.root)
