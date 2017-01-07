@@ -6,8 +6,13 @@ class Node(object):
 class LinkList(object):
     def __init__(self):
         self.head = None
+        self.tail = None
 
-    def add(self, data):
+    def add_simple(self, data):
+        """
+        Traverse all node and then add element.
+        Not that efficient method
+        """
         new_node = Node(data)
 
         if self.head is None:
@@ -16,8 +21,18 @@ class LinkList(object):
             temp = self.head
             while(temp.next is not None):
                 temp = temp.next
-            
+
             temp.next = new_node
+
+    def add(self, data):
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            temp = self.tail
+            temp.next = self.tail = new_node
+
 
     def print_list(self):
         temp = self.head
@@ -36,7 +51,7 @@ class LinkList(object):
             curr_ptr.next = result
             result = curr_ptr
             curr_ptr = next_ptr
-        
+
         self.head = result
 
 
